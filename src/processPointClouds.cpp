@@ -64,8 +64,6 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     extract.setNegative(true);
     extract.filter(*cloudRegion);
     
-    std::cout<<"POINTS"<<cloudRegion->points.size()<<std::endl;
-
 
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
@@ -115,10 +113,12 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 		PointT point2= cloud->points[index[1]];
 		index[2]=  (rand() % static_cast<int>(cloud->points.size() ));
 		PointT point3= cloud->points[index[2]];
-
+        //check points uniqueness
+       
         Eigen::Vector3d v1(point2.x-point1.x,point2.y-point1.y,point2.z-point1.z);
         Eigen::Vector3d v2(point3.x-point1.x,point3.y-point1.y,point3.z-point1.z);
         Eigen::Vector3d result(v1.cross(v2));
+
         float a = result(0);
         float b= result(1);
         float c= result(2);
@@ -136,6 +136,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 		}
 		if (count>m_in){
 			inliersResult = inl;
+            m_in= count;
 		}
 	}
 
