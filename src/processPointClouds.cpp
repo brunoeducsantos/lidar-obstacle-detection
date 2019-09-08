@@ -113,8 +113,9 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 		PointT point2= cloud->points[index[1]];
 		index[2]=  (rand() % static_cast<int>(cloud->points.size() ));
 		PointT point3= cloud->points[index[2]];
-        //check points uniqueness
-       
+        
+        //Find plane parameters
+
         Eigen::Vector3d v1(point2.x-point1.x,point2.y-point1.y,point2.z-point1.z);
         Eigen::Vector3d v2(point3.x-point1.x,point3.y-point1.y,point3.z-point1.z);
         Eigen::Vector3d result(v1.cross(v2));
