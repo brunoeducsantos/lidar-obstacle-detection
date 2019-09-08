@@ -1,6 +1,7 @@
 # Lidar Obstacle Detection
 
 <img src="media/Peek 2019-09-08 15-39.gif" width="700" height="400" />
+<img src="media/Peek 2019-09-08 15-55.gif" width="700" height="400" />
 
 ## Project description
 
