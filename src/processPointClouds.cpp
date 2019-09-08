@@ -116,10 +116,14 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 		index[2]=  (rand() % static_cast<int>(cloud->points.size() ));
 		PointT point3= cloud->points[index[2]];
 
-		float a= (point2.y-point1.y)*(point3.z-point1.z) - (point2.z-point1.z)*(point3.y-point1.y);
-		float b = (point2.z -point1.z)*(point3.x-point1.x) -(point2.x-point1.x)*(point3.z-point1.z);
-		float c= (point2.x-point1.x)*(point3.y-point1.y)-(point2.y-point1.y)*(point3.x-point1.x);
-		float d = - (a*point1.x + b*point1.y +c*point1.z);
+        Eigen::Vector3d v1(point2.x-point1.x,point2.y-point1.y,point2.z-point1.z);
+        Eigen::Vector3d v2(point3.x-point1.x,point3.y-point1.y,point3.z-point1.z);
+        Eigen::Vector3d result(v1.cross(v2));
+        float a = result(0);
+        float b= result(1);
+        float c= result(2);
+        float d = -result.dot(Eigen::Vector3d(point1.x,point1.y,point1.z));
+
 		// Measure distance between every point and fitted line
 		std::unordered_set<int> inl;
 		for(int j=0;j<cloud->points.size();j++){
