@@ -6,9 +6,9 @@
 
 The goal of project is apply segmentation of objects around the ego motion car and as a result detect obstacles around it using LiDAR data.
 In this project, the following tasks were completed:
-* Implementation of customized (3D Ransac)[https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/processPointClouds.cpp]
-* Implementation of (KDTree)[https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/kdtree.h]
-* Implementation of (pre-processing cloud pipeline)[https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/processPointClouds.cpp]
+* Implementation of customized [3D Ransac](https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/processPointClouds.cpp)
+* Implementation of [KDTree](https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/kdtree.h)
+* Implementation of [pre-processing cloud pipeline](https://github.com/brunoeducsantos/Lidar_Obstacle_Detection/blob/master/src/processPointClouds.cpp)
 
 ## Installation
 
