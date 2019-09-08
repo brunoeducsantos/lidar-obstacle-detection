@@ -82,14 +82,14 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
   // -----Open 3D viewer and display City Block     -----
   // ----------------------------------------------------
 
-  pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorI->FilterCloud(inputCloud, 0.1 , Eigen::Vector4f (-20., -20., -100., 1), Eigen::Vector4f ( 20., 5., 100., 1));
+  pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorI->FilterCloud(inputCloud, 0.5 , Eigen::Vector4f (-20., -5., -100., 1), Eigen::Vector4f ( 20., 5., 100., 1));
   //Separate ground and obstacles
   std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorI->SegmentPlane(filterCloud, 100, 0.3);
   renderPointCloud(viewer,segmentCloud.first,"obsCloud",Color(1,0,0));
   renderPointCloud(viewer,segmentCloud.second,"groundCloud",Color(0,1,0));
   
   //Clustering
-  std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(segmentCloud.first, 1., 10,650);
+  std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(segmentCloud.first, 1., 10,450);
   int clusterId = 0;
   std::vector<Color> colors = {Color(1,0,0), Color(0,1,0), Color(0,0,1)};
 

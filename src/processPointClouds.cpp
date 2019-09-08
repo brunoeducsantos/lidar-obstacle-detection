@@ -44,7 +44,7 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     typename pcl::PointCloud<PointT>::Ptr cloud_filtered2 (new pcl::PointCloud<PointT>());
     boxFilter.filter(*cloud_filtered2);
 
-    // TODO Crop roof top points
+    // Crop roof top points
     std::vector<int> indices;
     pcl::CropBox<PointT> roof(true);
     roof.setMin(Eigen::Vector4f(-1.5,-1.7,-1.,1));
