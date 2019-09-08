@@ -44,8 +44,6 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     typename pcl::PointCloud<PointT>::Ptr cloud_filtered2 (new pcl::PointCloud<PointT>());
     boxFilter.filter(*cloud_filtered2);
 
-    std::cout<<"POINTS"<<cloud_filtered2->points.size()<<std::endl;
-
     // TODO Crop roof top points
     std::vector<int> indices;
     pcl::CropBox<PointT> roof(true);
@@ -99,7 +97,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 }
 
 template<typename PointT>
-std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::SegmentPlane(typename pcl::PointCloud<PointT>::Ptr cloud, int maxIterations, float distanceThreshold)
+std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::SegmentPlane(const typename pcl::PointCloud<PointT>::Ptr cloud, int maxIterations, float distanceThreshold)
 {
     std::unordered_set<int> inliersResult;
 	srand(time(NULL));
@@ -125,7 +123,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 		// Measure distance between every point and fitted line
 		std::unordered_set<int> inl;
 		for(int j=0;j<cloud->points.size();j++){
-			float dist= fabs(a*cloud->points[j].x + b*cloud->points[j].y+c*b*cloud->points[j].z +d)/sqrt(pow(a,2) + pow(b,2) + pow(c,2));
+			float dist= fabs(a*cloud->points[j].x + b*cloud->points[j].y+c*cloud->points[j].z +d)/sqrt(pow(a,2) + pow(b,2) + pow(c,2));
 				// If distance is smaller than threshold count it as inlier
 			if(dist <= distanceThreshold){
 				count++;
